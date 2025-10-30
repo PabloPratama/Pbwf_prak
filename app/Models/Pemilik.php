@@ -15,6 +15,8 @@ class Pemilik extends Model
 
     protected $fillable = ['no_wa', 'alamat'];
 
+    public $timestamps = false;
+
     public function user()
     {
         return $this->belongsTo(User::class, 'iduser', 'iduser');

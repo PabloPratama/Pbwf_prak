@@ -19,12 +19,15 @@ class User extends Authenticatable
      */
     protected $table = 'user';
 
+    public $timestamps = false;
+
     protected $primaryKey = 'iduser';
 
     protected $fillable = [
         'name',
         'email',
         'password',
+        'idrole'
     ];
 
     /**
@@ -50,7 +53,14 @@ class User extends Authenticatable
         ];
     }
 
-    public function Pemilik()
+    public function roles()
+{
+    return $this->belongsToMany(Role::class, 'role_user', 'iduser', 'idrole')
+                ->withPivot('status');
+}
+
+
+    public function pemilik()
     {
         return $this->hasOne(Pemilik::class, 'iduser', 'iduser');
     }
