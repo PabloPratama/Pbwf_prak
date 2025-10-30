@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\JenisHewanController;
 use App\Http\Controllers\Admin\PemilikController;
+use App\Http\Controllers\Admin\RasHewanController;
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,4 @@ Route::get('/struktur-organisasi', [SiteController::class, 'strukturOrganisasi']
 Route::get('/login', [SiteController::class, 'login'])->name('login');
 Route::get('/admin/jenis-hewan', [JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
 Route::get('/admin/pemilik', [PemilikController::class, 'index'])->name('admin.pemilik.index');
+Route::get('/admin/ras-hewan', [RasHewanController::class, 'index'])->name('admin.ras-hewan.index');
