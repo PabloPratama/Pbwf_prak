@@ -11,6 +11,6 @@ class JenisHewanController extends Controller
     {
         $jenisHewan = JenisHewan::all();
 
-        return view('admin.jenis-hewan.index', compact('JenisHewan'));
+        return view('admin.jenis-hewan.index', compact('jenisHewan'));
     }
 }

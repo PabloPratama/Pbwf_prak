@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\JenisHewanController;
+use App\Http\Controllers\Admin\PemilikController;
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,3 +13,5 @@ Route::get('/layanan-umum', [SiteController::class, 'layananUmum'])->name('layan
 Route::get('/visi-misi', [SiteController::class, 'visiMisi'])->name('visi.misi');
 Route::get('/struktur-organisasi', [SiteController::class, 'strukturOrganisasi'])->name('struktur.organisasi');
 Route::get('/login', [SiteController::class, 'login'])->name('login');
+Route::get('/admin/jenis-hewan', [JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
+Route::get('/admin/pemilik', [PemilikController::class, 'index'])->name('admin.pemilik.index');
