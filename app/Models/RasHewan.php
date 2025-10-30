@@ -10,7 +10,6 @@ class RasHewan extends Model
     use HasFactory;
 
     protected $table = 'ras_hewan';
-
     protected $primaryKey = 'idras_hewan';
 
     public function jenisHewan()

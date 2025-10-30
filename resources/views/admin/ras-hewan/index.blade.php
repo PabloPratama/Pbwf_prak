@@ -2,16 +2,16 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Nama Ras Hewan</th> 
+            <th>Nama Ras Hewan</th>
             <th>Jenis Hewan</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($rasHewan as $index => $item)
             <tr>
-                <td>{{ $index + 1}}</td>
-                <td>{{ $item->nama_ras_hewan }}</td> 
-                <td>{{ $item->jenisHewan?->nama_jenis_hewan ?? 'N/A' }}</td> 
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $item->nama_ras }}</td>
+                <td>{{ $item->jenisHewan?->nama_jenis_hewan ?? 'N/A' }}</td>
             </tr>
         @endforeach
     </tbody>
