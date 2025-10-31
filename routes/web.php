@@ -29,3 +29,7 @@ Route::get('/admin/kode-tindakan-terapi', [KodeTindakanTerapiController::class, 
 Route::get('/admin/pet', [PetController::class, 'index'])->name('admin.pet.index');
 Route::get('/admin/role', [RoleController::class, 'index'])->name('admin.role.index');
 Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
