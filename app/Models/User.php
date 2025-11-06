@@ -53,10 +53,10 @@ class User extends Authenticatable
         ];
     }
 
-    public function roles()
+    public function roleUser() 
 {
     return $this->belongsToMany(Role::class, 'role_user', 'iduser', 'idrole')
-                ->withPivot('status');
+                ->withPivot('status', 'idrole'); 
 }
 
 

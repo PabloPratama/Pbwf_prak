@@ -3,22 +3,20 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request; 
+use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Validator; 
+use App\Models\User; 
+use App\Models\Role; 
 
 class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Login Controller
+    | Login Controller (Implementasi Kustom)
     |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
     */
-
-    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -35,6 +33,72 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->middleware('auth')->only('logout');
+    }
+
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $user = User::with(['roleUser' => function($query) {
+        $query->wherePivot('status', 1);
+        }])
+        ->where('email', $request->input('email'))
+        ->first();
+
+        if (!$user) {
+            return redirect()->back()
+                ->withErrors(['email' => 'Email tidak ditemukan.'])
+                ->withInput();
+        }
+
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()
+                ->withErrors(['password' => 'Password salah.'])
+                ->withInput();
+        }
+
+        if ($user->roleUser->isEmpty()) {
+             return redirect()->back()
+                ->withErrors(['email' => 'Akun tidak memiliki role aktif.'])
+                ->withInput();
+        }
+
+        $idRole = $user->roleUser[0]->pivot->idrole ?? null; 
+        $namaRole = Role::where('idrole', $idRole)->first();
+
+        Auth::login($user);
+
+        $request->session()->put([
+            'user_id' => $user->iduser,
+            'user_name' => $user->nama, 
+            'user_email' => $user->email,
+            'user_role' => $idRole ?? 'user', 
+            'user_role_name' => $namaRole->nama_role ?? 'User',
+            'user_status' => $user->roleUser[0]->pivot->status ?? 'active'
+        ]);
+
+        return redirect()->intended('/home')->with('success', 'Login berhasil!'); 
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('success', 'Logout berhasil!');
     }
 }
