@@ -13,74 +13,75 @@ use App\Models\Role;
 class LoginController extends Controller
 {
     /*
-    |--------------------------------------------------------------------------
-    | Login Controller (Implementasi Kustom)
-    |--------------------------------------------------------------------------
-    */
+    |--------------------------------------------------------------------------
+    | Login Controller (Implementasi Kustom)
+    |--------------------------------------------------------------------------
+    */
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
     protected $redirectTo = '/home';
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
-    $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout');
     }
 
     public function showLoginForm()
     {
-    return view('auth.login');
+        return view('auth.login');
     }
 
     public function login(Request $request)
     {
-    $validator = Validator::make($request->all(), [
-    'email' => 'required|email',
-    'password' => 'required|min:6',
-    ]);
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
 
-    if ($validator->fails()) {
-    return redirect()->back()
-    ->withErrors($validator)
-    ->withInput();
-    }
-    $user = User::with(['roleUser' => function($query) {
-    $query->wherePivot('status', 1);
-    }])
-    ->where('email', $request->input('email'))
-    ->first();
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $user = User::with(['roleUser' => function($query) {
+            $query->wherePivot('status', 1);
+        }])
+        ->where('email', $request->input('email'))
+        ->first();
 
-    if (!$user) {
-    return redirect()->back()
-    ->withErrors(['email' => 'Email tidak ditemukan.'])
-    ->withInput();
-    }
+        if (!$user) {
+            return redirect()->back()
+                ->withErrors(['email' => 'Email tidak ditemukan.'])
+                ->withInput();
+        }
 
-    if (!Hash::check($request->password, $user->password)) {
-    return redirect()->back()
-    ->withErrors(['password' => 'Password salah.'])
-    ->withInput();
-    }
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->back()
+                ->withErrors(['password' => 'Password salah.'])
+                ->withInput();
+        }
 
-    if ($user->roleUser->isEmpty()) {
-    return redirect()->back()
-    ->withErrors(['email' => 'Akun tidak memiliki role aktif.'])
-    ->withInput();
-    }
+        if ($user->roleUser->isEmpty()) {
+             return redirect()->back()
+                ->withErrors(['email' => 'Akun tidak memiliki role aktif.'])
+                ->withInput();
+        }
 
         $idRole = $user->roleUser[0]->pivot->idrole ?? null; 
         $namaRole = Role::where('idrole', $idRole)->first();
 
         Auth::login($user);
 
+        // Menyimpan data user dan role ke dalam session
         $request->session()->put([
             'user_id' => $user->iduser,
             'user_name' => $user->nama, 
@@ -90,7 +91,22 @@ class LoginController extends Controller
             'user_status' => $user->roleUser[0]->pivot->status ?? 'active'
         ]);
 
-        return redirect()->intended('/home')->with('success', 'Login berhasil!'); 
+        // Logika Redireksi Berdasarkan Role (Langkah 6)
+        switch ($idRole) {
+            case '1': // Administrator
+                return redirect()->route('admin.dashboard')->with('success', 'Login berhasil!');
+            case '2': // Dokter 
+                return redirect()->route('dokter.dashboard')->with('success', 'Login berhasil!');
+            case '3': // Perawat 
+                return redirect()->route('perawat.dashboard')->with('success', 'Login berhasil!');
+            case '4': // Resepsionis 
+                return redirect()->route('resepsionis.dashboard')->with('success', 'Login berhasil!');
+            case '5': // Pemilik 
+                return redirect()->route('pemilik.dashboard')->with('success', 'Login berhasil!');
+            default:
+                // Redirect default
+                return redirect()->intended('/home')->with('success', 'Login berhasil!');
+        }
     }
 
     public function logout(Request $request)
