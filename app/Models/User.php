@@ -24,7 +24,7 @@ class User extends Authenticatable
     protected $primaryKey = 'iduser';
 
     protected $fillable = [
-        'name',
+        'nama',
         'email',
         'password',
         'idrole'
@@ -56,9 +56,8 @@ class User extends Authenticatable
     public function roleUser() 
 {
     return $this->belongsToMany(Role::class, 'role_user', 'iduser', 'idrole')
-                ->withPivot('status', 'idrole'); 
+                ->withPivot('status'); 
 }
-
 
     public function pemilik()
     {

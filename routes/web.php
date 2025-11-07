@@ -16,7 +16,9 @@ Route::get('/visi-misi', [SiteController::class, 'visiMisi'])->name('visi.misi')
 Route::get('/struktur-organisasi', [SiteController::class, 'strukturOrganisasi'])->name('struktur.organisasi');
 Route::get('/login', [SiteController::class, 'login'])->name('login');
 
+
 Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/admin/jenis-hewan', [JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
