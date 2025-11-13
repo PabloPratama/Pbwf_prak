@@ -6,7 +6,12 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\Admin\JenisHewanController;
 use App\Http\Controllers\Admin\PemilikController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Resepsionis\DashboardResepsionisController;
+use App\Http\Controllers\Resepsionis\PemilikResepsionisController;
+use App\Http\Controllers\Resepsionis\PetResepsionisController;
+
 
 // ========== HALAMAN PUBLIK ==========
 Route::get('/', [SiteController::class, 'home'])->name('site.home');
@@ -25,9 +30,13 @@ Route::middleware(['IsAdministrator'])->group(function () {
     Route::get('/admin/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/jenis-hewan', [JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
     Route::get('/admin/pemilik', [PemilikController::class, 'index'])->name('admin.pemilik.index');
+    Route::get('/admin/role', [RoleController::class, 'index'])->name('admin.role.index');
+    Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
 });
 
 // ========== RESEPSIONIS ==========
 Route::middleware(['IsResepsionis'])->group(function () {
     Route::get('/resepsionis/dashboard', [DashboardResepsionisController::class, 'index'])->name('resepsionis.dashboard');
+    Route::get('/resepsionis/pemilik', [PemilikResepsionisController::class, 'index'])->name('resepsionis.pemilik.index');
+    Route::get('/resepsionis/pet', [PetResepsionisController::class, 'index'])->name('resepsionis.pet.index');
 });

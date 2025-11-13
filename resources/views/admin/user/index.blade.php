@@ -14,7 +14,7 @@
             <td>{{ $user->nama ?? $user->name ?? 'N/A' }}</td>
             <td>{{ $user->email }}</td>
             <td>
-                @foreach ($user->roles as $role)
+                @foreach ($user->roleUser as $role)
                     {{ $role->nama_role }}@if (!$loop->last), @endif
                 @endforeach
             </td>

@@ -18,11 +18,18 @@
                     
                     <div class="mt-4">
                         <p>Menu Administrasi:</p>
-                        <a href="{{ route('admin.jenis-hewan.index') }}" class="btn btn-primary mb-2">
-                            Kelola Jenis Hewan
+
+                        <a href="{{ route('admin.jenis-hewan.index') }}" class="btn btn-primary mb-2 w-100">
+                            Lihat Data Jenis Hewan
                         </a>
-                        <a href="{{ route('admin.pemilik.index') }}" class="btn btn-success mb-2">
-                            Kelola Pemilik
+                        <a href="{{ route('admin.pemilik.index') }}" class="btn btn-success mb-2 w-100">
+                            Lihat Data Pemilik
+                        </a>
+                        <a href="{{ route('admin.user.index') }}" class="btn btn-warning mb-2 w-100">
+                            LIhat Data User
+                        </a>
+                        <a href="{{ route('admin.role.index') }}" class="btn btn-info mb-2 w-100">
+                            Lihat Data Role
                         </a>
                     </div>
 

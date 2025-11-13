@@ -28,7 +28,6 @@ class IsResepsionis
         if ($userRole == 4) { // Sesuaikan dengan ID peran Resepsionis Anda
             return $next($request); // Lanjutkan ke halaman yang diminta
         } else {
-            // Tunjukkan pesan error dan arahkan pengguna kembali
             return back()->with('error', 'Akses Ditolak: Anda harus login sebagai Resepsionis.');
         }
     }
