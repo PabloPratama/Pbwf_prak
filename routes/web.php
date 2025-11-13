@@ -1,25 +1,33 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Site\SiteController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\Admin\JenisHewanController;
 use App\Http\Controllers\Admin\PemilikController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Site\SiteController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Resepsionis\DashboardResepsionisController;
 
-Route::get('/cek-koneksi', [SiteController::class, 'cekKoneksi'])->name('site.cek-koneksi');
-
-Route::get('/', [SiteController::class, 'home']);
+// ========== HALAMAN PUBLIK ==========
+Route::get('/', [SiteController::class, 'home'])->name('site.home');
 Route::get('/home', [SiteController::class, 'home'])->name('home');
 Route::get('/layanan-umum', [SiteController::class, 'layananUmum'])->name('layanan.umum');
 Route::get('/visi-misi', [SiteController::class, 'visiMisi'])->name('visi.misi');
 Route::get('/struktur-organisasi', [SiteController::class, 'strukturOrganisasi'])->name('struktur.organisasi');
-Route::get('/login', [SiteController::class, 'login'])->name('login');
 
+// ========== LOGIN ==========
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Auth::routes();
+// ========== ADMIN ==========
+Route::middleware(['IsAdministrator'])->group(function () {
+    Route::get('/admin/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/jenis-hewan', [JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
+    Route::get('/admin/pemilik', [PemilikController::class, 'index'])->name('admin.pemilik.index');
+});
 
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/admin/jenis-hewan', [JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
-Route::get('/admin/pemilik', [PemilikController::class, 'index'])->name('admin.pemilik.index');
+// ========== RESEPSIONIS ==========
+Route::middleware(['IsResepsionis'])->group(function () {
+    Route::get('/resepsionis/dashboard', [DashboardResepsionisController::class, 'index'])->name('resepsionis.dashboard');
+});
