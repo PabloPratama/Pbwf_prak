@@ -24,9 +24,9 @@ class IsResepsionis
         // 2. Ambil peran pengguna dari session
         $userRole = session('user_role'); 
 
-        // 3. Cek apakah ID peran adalah Resepsionis (Asumsi ID = 4)
-        if ($userRole == 4) { // Sesuaikan dengan ID peran Resepsionis Anda
-            return $next($request); // Lanjutkan ke halaman yang diminta
+        // 3. Cek apakah ID peran adalah Resepsionis 
+        if ($userRole == 4) { 
+            return $next($request);
         } else {
             return back()->with('error', 'Akses Ditolak: Anda harus login sebagai Resepsionis.');
         }

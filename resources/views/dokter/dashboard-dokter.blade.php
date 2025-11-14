@@ -7,7 +7,7 @@
             <div class="card">
                 
                 <div class="card-header">
-                    {{ __('Dashboard Administrator') }} — {{ session('user_name') }}
+                    {{ __('Dashboard Dokter') }} — {{ session('user_name') }}
                 </div>
 
                 <div class="card-body">
@@ -19,25 +19,34 @@
                     @endif
 
                     {{ __('You are logged in!') }} **{{ session('user_role_name') }}**
-                    
-                    <div class="mt-4">
-                        <p>Menu Administrasi:</p>
 
-                        <a href="{{ route('admin.jenis-hewan.index') }}" class="btn btn-primary mb-2 w-100">
+                    <div class="mt-4">
+                        <p>Menu Dokter:</p>
+
+                        <a href="{{ route('dokter.jenis-hewan.index') }}" class="btn btn-primary mb-2 w-100">
                             Lihat Data Jenis Hewan
                         </a>
-                        <a href="{{ route('admin.pemilik.index') }}" class="btn btn-success mb-2 w-100">
-                            Lihat Data Pemilik
+
+                        <a href="{{ route('dokter.ras-hewan.index') }}" class="btn btn-success mb-2 w-100">
+                            Lihat Data Ras Hewan
                         </a>
-                        <a href="{{ route('admin.user.index') }}" class="btn btn-warning mb-2 w-100">
-                            LIhat Data User
+
+                        <a href="{{ route('dokter.kategori.index') }}" class="btn btn-info mb-2 w-100">
+                            Lihat Data Kategori
                         </a>
-                        <a href="{{ route('admin.role.index') }}" class="btn btn-info mb-2 w-100">
-                            Lihat Data Role
+
+                        <a href="{{ route('dokter.kategori-klinis.index') }}" class="btn btn-warning mb-2 w-100">
+                            Lihat Data Kategori Klinis
                         </a>
+
+                        <a href="{{ route('dokter.tindakan.index') }}" class="btn btn-danger mb-2 w-100">
+                            Lihat Data Kode Tindakan & Terapi
+                        </a>
+
                     </div>
 
                 </div>
+
             </div>
         </div>
     </div>

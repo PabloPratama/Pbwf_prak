@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth; 
 
-class IsAdministrator
+class IsPerawat
 {
     /**
      * Handle an incoming request.
@@ -25,7 +25,7 @@ class IsAdministrator
         $userRole = session('user_role'); 
         
         // 3. Cek apakah ID peran adalah Administrator 
-        if ($userRole == 1) { 
+        if ($userRole == 3) { 
             return $next($request); 
         } else {
             // Tunjukkan pesan error dan arahkan pengguna kembali
