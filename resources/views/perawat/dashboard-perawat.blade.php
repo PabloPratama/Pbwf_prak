@@ -28,15 +28,15 @@
                         </a>
 
                         <a href="{{ route('perawat.pemilik.index') }}" class="btn btn-success mb-2 w-100">
-                            Lihat Pemilik
+                            Lihat Data Pemilik
                         </a>
 
                         <a href="{{ route('perawat.jenis-hewan.index') }}" class="btn btn-warning mb-2 w-100">
-                            Lihat Jenis Hewan
+                            Lihat Data Jenis Hewan
                         </a>
 
                         <a href="{{ route('perawat.ras-hewan.index') }}" class="btn btn-info mb-2 w-100">
-                            Lihat Ras Hewan
+                            Lihat Data Ras Hewan
                         </a>
 
                         <a href="{{ route('perawat.tindakan.index') }}" class="btn btn-danger mb-2 w-100">

@@ -23,6 +23,8 @@ use App\Http\Controllers\Perawat\PetPerawatController;
 use App\Http\Controllers\Perawat\JenisHewanPerawatController;
 use App\Http\Controllers\Perawat\RasHewanPerawatController;
 use App\Http\Controllers\Perawat\TindakanPerawatController;
+use App\Http\Controllers\Pemilik\DashboardPemilikController;
+use App\Http\Controllers\Pemilik\PetPemilikController;
 
 
 // ========== HALAMAN PUBLIK ==========
@@ -71,5 +73,11 @@ Route::middleware(['IsPerawat'])->group(function () {
     Route::get('/perawat/pemilik', [PemilikPerawatController::class, 'index'])->name('perawat.pemilik.index');
     Route::get('/perawat/tindakan-terapi', [TindakanPerawatController::class, 'index'])->name('perawat.tindakan.index');
     Route::get('/perawat/pet', [PetPerawatController::class, 'index'])->name('perawat.pet.index');
+});
+
+// ========== Pemilik ==========
+Route::middleware(['IsPemilik'])->group(function () {
+    Route::get('/pemilik/dashboard', [DashboardPemilikController::class, 'index'])->name('pemilik.dashboard');
+    Route::get('/pemilik/pet', [PetPemilikController::class, 'index'])->name('pemilik.pet.index');
 });
 
