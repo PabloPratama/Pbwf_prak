@@ -43,6 +43,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['IsAdministrator'])->group(function () {
     Route::get('/admin/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/jenis-hewan', [JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
+    Route::get('/admin/jenis-hewan/create', [JenisHewanController::class, 'create'])->name('admin.jenis-hewan.create');
+    Route::post('/admin/jenis-hewan/store', [JenisHewanController::class, 'store'])->name('admin.jenis-hewan.store');
     Route::get('/admin/pemilik', [PemilikController::class, 'index'])->name('admin.pemilik.index');
     Route::get('/admin/role', [RoleController::class, 'index'])->name('admin.role.index');
     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
