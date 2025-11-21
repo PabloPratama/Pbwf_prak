@@ -8,6 +8,11 @@ use App\Http\Controllers\Admin\JenisHewanController;
 use App\Http\Controllers\Admin\PemilikController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PetController;
+use App\Http\Controllers\Admin\RasHewanController;
+use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\Admin\KategoriKlinisController;
+use App\Http\Controllers\Admin\TindakanController;
 use App\Http\Controllers\Resepsionis\DashboardResepsionisController;
 use App\Http\Controllers\Resepsionis\PemilikResepsionisController;
 use App\Http\Controllers\Resepsionis\PetResepsionisController;
@@ -46,8 +51,15 @@ Route::middleware(['IsAdministrator'])->group(function () {
     Route::get('/admin/jenis-hewan/create', [JenisHewanController::class, 'create'])->name('admin.jenis-hewan.create');
     Route::post('/admin/jenis-hewan/store', [JenisHewanController::class, 'store'])->name('admin.jenis-hewan.store');
     Route::get('/admin/pemilik', [PemilikController::class, 'index'])->name('admin.pemilik.index');
+    Route::get('/admin/pemilik/create', [PemilikController::class, 'create'])->name('admin.pemilik.create');
+    Route::post('/admin/pemilik/store', [PemilikController::class, 'store'])->name('admin.pemilik.store');
     Route::get('/admin/role', [RoleController::class, 'index'])->name('admin.role.index');
     Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
+    Route::get('/admin/pet', [PetController::class, 'index'])->name('admin.pet.index');
+    Route::get('/admin/ras-hewan', [RasHewanController::class, 'index'])->name('admin.ras-hewan.index');
+    Route::get('/admin/kategori', [KategoriController::class, 'index'])->name('admin.kategori.index');
+    Route::get('/admin/kategori-klinis', [KategoriKlinisController::class, 'index'])->name('admin.kategori-klinis.index');
+    Route::get('/admin/tindakan-terapi', [TindakanController::class, 'index'])->name('admin.tindakan-terapi.index');
 });
 
 // ========== RESEPSIONIS ==========
