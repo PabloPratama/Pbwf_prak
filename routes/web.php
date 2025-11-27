@@ -13,6 +13,9 @@ use App\Http\Controllers\Admin\RasHewanController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\KategoriKlinisController;
 use App\Http\Controllers\Admin\TindakanController;
+use App\Http\Controllers\Admin\TemuDokterController;
+use App\Http\Controllers\Admin\RekamMedisController;
+use App\Http\Controllers\Admin\DetailRekamMedisController;
 use App\Http\Controllers\Resepsionis\DashboardResepsionisController;
 use App\Http\Controllers\Resepsionis\PemilikResepsionisController;
 use App\Http\Controllers\Resepsionis\PetResepsionisController;
@@ -60,6 +63,9 @@ Route::middleware(['IsAdministrator'])->group(function () {
     Route::get('/admin/kategori', [KategoriController::class, 'index'])->name('admin.kategori.index');
     Route::get('/admin/kategori-klinis', [KategoriKlinisController::class, 'index'])->name('admin.kategori-klinis.index');
     Route::get('/admin/tindakan-terapi', [TindakanController::class, 'index'])->name('admin.tindakan-terapi.index');
+    Route::get('/admin/temu-dokter', [TemuDokterController::class, 'index'])->name('admin.temu-dokter.index');
+    Route::get('/admin/rekam-medis', [RekamMedisController::class, 'index'])->name('admin.rekam-medis.index');
+    Route::get('/admin/detail-rekam-medis', [DetailRekamMedisController::class, 'index'])->name('admin.detail-rekam-medis.index');
 });
 
 // ========== RESEPSIONIS ==========

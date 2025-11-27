@@ -22,9 +22,9 @@ class JenisHewanController extends Controller
 
     public function store(Request $request)
     {
-    // Validasi input 
+
     $validatedData = $this->validateJenisHewan($request);
-    // Menyimpan data 
+
     $this->createJenisHewan($validatedData);
 
     return redirect()->route('admin.jenis-hewan.index')
@@ -32,12 +32,12 @@ class JenisHewanController extends Controller
 }
     protected function validateJenisHewan(Request $request, $id = null)
     {
-    // data yang bersifat uniq
+
     $uniqueRule = $id ?
         'unique:jenis_hewan,nama_jenis_hewan,' . $id . ',idjenis_hewan' :
         'unique:jenis_hewan,nama_jenis_hewan';
 
-    // validasi data input
+        
     return $request->validate([
         'nama_jenis_hewan' => [
             'required',

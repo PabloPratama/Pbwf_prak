@@ -59,6 +59,17 @@
                             Lihat Data Tindakan Terapi
                         </a>
 
+                        <a href="{{ route('admin.temu-dokter.index') }}" class="btn btn-primary mb-2 w-100">
+                            Lihat Data Temu Dokter
+                        </a>
+                        
+                        <a href="{{ route('admin.rekam-medis.index') }}" class="btn btn-success mb-2 w-100">
+                            Lihat Data Rekam Medis
+                        </a>
+
+                        <a href="{{ route('admin.detail-rekam-medis.index') }}" class="btn btn-danger mb-2 w-100">
+                            Lihat Data Detail Rekam Medis
+                        </a>
                     </div>
 
                 </div>
