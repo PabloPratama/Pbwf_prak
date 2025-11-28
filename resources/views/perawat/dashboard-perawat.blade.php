@@ -24,7 +24,7 @@
                         <p>Menu Perawat:</p>
 
                         <a href="{{ route('perawat.pet.index') }}" class="btn btn-primary mb-2 w-100">
-                            Lihat Data Hewan
+                            Lihat Data Pasien
                         </a>
 
                         <a href="{{ route('perawat.pemilik.index') }}" class="btn btn-success mb-2 w-100">
@@ -41,6 +41,14 @@
 
                         <a href="{{ route('perawat.tindakan.index') }}" class="btn btn-danger mb-2 w-100">
                             Lihat Data Kode Tindakan & Terapi
+                        </a>
+
+                        <a href="{{ route('perawat.rekam-medis.index') }}" class="btn btn-warning mb-2 w-100">
+                            Lihat Data Rekam Medis
+                        </a>
+
+                        <a href="{{ route('perawat.detail-rekam-medis.index') }}" class="btn btn-primary mb-2 w-100">
+                            Lihat Data Detail Rekam Medis
                         </a>
 
                     </div>

@@ -43,6 +43,18 @@
                             Lihat Data Kode Tindakan & Terapi
                         </a>
 
+                        <a href="{{ route('dokter.pet.index') }}" class="btn btn-warning mb-2 w-100">
+                            Lihat Data Pasien
+                        </a>
+
+                        <a href="{{ route('dokter.rekam-medis.index') }}" class="btn btn-primary mb-2 w-100">
+                            Lihat Data Rekam medis
+                        </a>
+
+                        <a href="{{ route('dokter.detail-rekam-medis.index') }}" class="btn btn-info mb-2 w-100">
+                            Lihat Data Detail Rekam medis
+                        </a>
+
                     </div>
 
                 </div>

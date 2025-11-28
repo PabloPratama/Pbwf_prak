@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\SiteController;
 use App\Http\Controllers\Auth\LoginController;
+
 use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\Admin\JenisHewanController;
 use App\Http\Controllers\Admin\PemilikController;
@@ -16,23 +17,36 @@ use App\Http\Controllers\Admin\TindakanController;
 use App\Http\Controllers\Admin\TemuDokterController;
 use App\Http\Controllers\Admin\RekamMedisController;
 use App\Http\Controllers\Admin\DetailRekamMedisController;
+
 use App\Http\Controllers\Resepsionis\DashboardResepsionisController;
 use App\Http\Controllers\Resepsionis\PemilikResepsionisController;
 use App\Http\Controllers\Resepsionis\PetResepsionisController;
+use App\Http\Controllers\Resepsionis\TemuDokterResepsionisController;
+
 use App\Http\Controllers\Dokter\DashboardDokterController;
 use App\Http\Controllers\Dokter\JenisHewanDokterController;
 use App\Http\Controllers\Dokter\RasHewanDokterController;
 use App\Http\Controllers\Dokter\KategoriDokterController;
 use App\Http\Controllers\Dokter\KategoriKlinisDokterController;
 use App\Http\Controllers\Dokter\TindakanDokterController;
+use App\Http\Controllers\Dokter\PetDokterController;
+use App\Http\Controllers\Dokter\RekamMedisDokterController;
+use App\Http\Controllers\Dokter\DetailRekamMedisDokterController;
+
 use App\Http\Controllers\Perawat\DashboardPerawatController;
 use App\Http\Controllers\Perawat\PemilikPerawatController;
 use App\Http\Controllers\Perawat\PetPerawatController;
 use App\Http\Controllers\Perawat\JenisHewanPerawatController;
 use App\Http\Controllers\Perawat\RasHewanPerawatController;
 use App\Http\Controllers\Perawat\TindakanPerawatController;
+use App\Http\Controllers\Perawat\RekamMedisPerawatController;
+use App\Http\Controllers\Perawat\DetailRekamMedisPerawatController;
+
 use App\Http\Controllers\Pemilik\DashboardPemilikController;
 use App\Http\Controllers\Pemilik\PetPemilikController;
+use App\Http\Controllers\Pemilik\PemilikPemilikController;
+use App\Http\Controllers\Pemilik\TemuDokterPemilikController;
+use App\Http\Controllers\Pemilik\RekamMedisPemilikController;
 
 
 // ========== HALAMAN PUBLIK ==========
@@ -73,6 +87,7 @@ Route::middleware(['IsResepsionis'])->group(function () {
     Route::get('/resepsionis/dashboard', [DashboardResepsionisController::class, 'index'])->name('resepsionis.dashboard');
     Route::get('/resepsionis/pemilik', [PemilikResepsionisController::class, 'index'])->name('resepsionis.pemilik.index');
     Route::get('/resepsionis/pet', [PetResepsionisController::class, 'index'])->name('resepsionis.pet.index');
+    Route::get('/resepsionis/temu-dokter', [TemuDokterResepsionisController::class, 'index'])->name('resepsionis.temu-dokter.index');
 });
 
 // ========== DOKTER ==========
@@ -83,6 +98,9 @@ Route::middleware(['IsDokter'])->group(function () {
     Route::get('/dokter/kategori', [KategoriDokterController::class, 'index'])->name('dokter.kategori.index');
     Route::get('/dokter/kategori-klinis', [KategoriKlinisDokterController::class, 'index'])->name('dokter.kategori-klinis.index');
     Route::get('/dokter/tindakan-terapi', [TindakanDokterController::class, 'index'])->name('dokter.tindakan.index');
+    Route::get('/dokter/pet', [PetDokterController::class, 'index'])->name('dokter.pet.index');
+    Route::get('/dokter/rekam-medis', [RekamMedisDokterController::class, 'index'])->name('dokter.rekam-medis.index');
+    Route::get('/dokter/detail-rekam-medis', [DetailRekamMedisDokterController::class, 'index'])->name('dokter.detail-rekam-medis.index');
 });
 
 // ========== Perawat ==========
@@ -93,11 +111,16 @@ Route::middleware(['IsPerawat'])->group(function () {
     Route::get('/perawat/pemilik', [PemilikPerawatController::class, 'index'])->name('perawat.pemilik.index');
     Route::get('/perawat/tindakan-terapi', [TindakanPerawatController::class, 'index'])->name('perawat.tindakan.index');
     Route::get('/perawat/pet', [PetPerawatController::class, 'index'])->name('perawat.pet.index');
+    Route::get('/perawat/rekam-medis', [RekamMedisPerawatController::class, 'index'])->name('perawat.rekam-medis.index');
+    Route::get('/perawat/detail-rekam-medis', [DetailRekamMedisPerawatController::class, 'index'])->name('perawat.detail-rekam-medis.index');
 });
 
 // ========== Pemilik ==========
 Route::middleware(['IsPemilik'])->group(function () {
     Route::get('/pemilik/dashboard', [DashboardPemilikController::class, 'index'])->name('pemilik.dashboard');
     Route::get('/pemilik/pet', [PetPemilikController::class, 'index'])->name('pemilik.pet.index');
+    Route::get('/pemilik/pemilik', [PemilikPemilikController::class, 'index'])->name('pemilik.pemilik.index');
+    Route::get('/pemilik/temu-dokter', [TemuDokterPemilikController::class, 'index'])->name('pemilik.temu-dokter.index');
+    Route::get('/pemilik/rekam-medis', [RekamMedisPemilikController::class, 'index'])->name('pemilik.rekam-medis.index');
 });
 

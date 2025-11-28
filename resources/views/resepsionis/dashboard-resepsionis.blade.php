@@ -27,6 +27,10 @@
                         <a href="{{ route('resepsionis.pet.index') }}" class="btn btn-success mb-2 w-100">
                             Lihat Data Hewan
                         </a>
+
+                        <a href="{{ route('resepsionis.temu-dokter.index') }}" class="btn btn-primary mb-2 w-100">
+                            Lihat Data Temu Dokter
+                        </a>
                     </div>
 
                 </div>

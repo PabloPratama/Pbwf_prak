@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dokter;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DetailRekamMedis;
 use App\Models\RekamMedis;
 
-class DetailRekamMedisController extends Controller
+class DetailRekamMedisDokterController extends Controller
 {
     public function index()
     {
@@ -16,7 +16,6 @@ class DetailRekamMedisController extends Controller
         'rekamMedis.dokter',
         'tindakan'
     ])->get();
-    return view('admin.detail-rekam-medis.index', compact('detail'));
+    return view('dokter.detail-rekam-medis.index', compact('detail'));
     }
-
 }

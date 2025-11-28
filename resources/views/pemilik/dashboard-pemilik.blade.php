@@ -27,6 +27,18 @@
                             Lihat Data Hewan Saya
                         </a>
 
+                        <a href="{{ route('pemilik.pemilik.index') }}" class="btn btn-primary mb-2 w-100">
+                            Lihat Data Pemilik
+                        </a>
+
+                        <a href="{{ route('pemilik.rekam-medis.index') }}" class="btn btn-primary mb-2 w-100">
+                            Lihat Data Rekam Medis
+                        </a>
+
+                        <a href="{{ route('pemilik.temu-dokter.index') }}" class="btn btn-primary mb-2 w-100">
+                            Lihat Data Temu Dokter
+                        </a>
+
                     </div>
 
                 </div>
