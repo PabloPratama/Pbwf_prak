@@ -6,6 +6,8 @@
             <th>Waktu Daftar</th>
             <th>Status</th>
             <th>Nama Dokter</th>
+            <th>No Urut</th>
+            <th>Nama Pemilik</th>
         </tr>
     </thead>
     <tbody>
@@ -15,7 +17,9 @@
             <td>{{ $item->pet?->nama ?? 'N/A' }}</td>
             <td>{{ $item->waktu_daftar }}</td>
             <td>{{ $item->status }}</td>
-            <td>{{ $item->dokter?->user?->nama ?? '-' }}</td>
+            <td>{{ $item->roleDokter?->user?->nama ?? '-' }}</td>
+            <td>{{ $item->no_urut }}</td>
+            <td>{{ $item->pet?->pemilik?->user?->nama ?? '-' }}</td>
         </tr>
         @endforeach
     </tbody>

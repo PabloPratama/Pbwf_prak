@@ -10,7 +10,7 @@ class RekamMedisPemilikController extends Controller
 {
     public function index()
     {
-        $rekam = RekamMedis::with(['temuDokter.pet', 'dokter', 'detail'])->get();
+        $rekam = RekamMedis::with(['temuDokter.pet.pemilik.user','dokter'])->get();
         return view('pemilik.rekam-medis.index', compact('rekam'));
     }
 }

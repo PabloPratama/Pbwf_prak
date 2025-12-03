@@ -25,10 +25,13 @@ class TemuDokter extends Model
         return $this->belongsTo(Pet::class, 'idpet', 'idpet');
     }
 
+    public function roleDokter()
+    {
+    return $this->belongsTo(RoleUser::class, 'idrole_user', 'idrole_user')
+                ->where('idrole', 2); 
+    }
     public function dokter()
     {
-    return $this->hasOne(RoleUser::class, 'idrole_user', 'idrole_user')
-        ->where('idrole', 2) 
-        ->with('user'); 
+    return $this->roleDokter?->user;
     }
 }

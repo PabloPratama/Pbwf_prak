@@ -11,7 +11,7 @@ class TemuDokterResepsionisController extends Controller
 {
     public function index()
     {
-        $temu = TemuDokter::with(['pet', 'dokter'])->get();
+    $temu = TemuDokter::with(['pet.pemilik.user', 'roleDokter.user'])->get();
         return view('resepsionis.temu-dokter.index', compact('temu'));
     }
 }

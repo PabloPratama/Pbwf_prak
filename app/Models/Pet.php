@@ -13,7 +13,7 @@ class Pet extends Model
     protected $primaryKey = 'idpet';
     public $timestamps = false;
 
-    protected $fillable = ['nama', 'tanggal_lahir', 'warna_tanda', 'jenis_kelamin', 'idpemilik', 'idras_hewan'];
+    protected $fillable = ['nama_pet', 'tanggal_lahir', 'warna_tanda', 'jenis_kelamin', 'idpemilik', 'idras_hewan'];
 
     public function pemilik()
     {

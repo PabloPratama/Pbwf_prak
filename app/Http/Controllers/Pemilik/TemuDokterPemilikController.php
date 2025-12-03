@@ -11,7 +11,7 @@ class TemuDokterPemilikController extends Controller
 {
     public function index()
     {
-        $temu = TemuDokter::with(['pet', 'dokter'])->get();
+    $temu = TemuDokter::with(['pet.pemilik.user', 'roleDokter.user'])->get();
         return view('pemilik.temu-dokter.index', compact('temu'));
     }
 }
