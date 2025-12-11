@@ -14,12 +14,6 @@ class KategoriKlinis extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idkategori',
         'nama_kategori_klinis',
     ];
-
-    public function kategori()
-    {
-        return $this->belongsTo(Kategori::class, 'idkategori', 'idkategori');
-    }
 }

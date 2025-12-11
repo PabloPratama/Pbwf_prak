@@ -29,7 +29,37 @@ class JenisHewanController extends Controller
 
     return redirect()->route('admin.jenis-hewan.index')
                     ->with('success', 'Jenis hewan berhasil ditambahkan.');
+    }
+
+    public function edit($id)
+{
+    $jenis = JenisHewan::findOrFail($id);
+    return view('admin.jenis-hewan.edit', compact('jenis'));
 }
+
+public function update(Request $request, $id)
+{
+    $validated = $this->validateJenisHewan($request, $id);
+
+    $jenis = JenisHewan::findOrFail($id);
+    $jenis->update([
+        'nama_jenis_hewan' => $this->formatNamaJenisHewan($validated['nama_jenis_hewan'])
+    ]);
+
+    return redirect()->route('admin.jenis-hewan.index')
+                    ->with('success', 'Jenis hewan berhasil diperbarui.');
+}
+
+public function destroy($id)
+{
+    $jenis = JenisHewan::findOrFail($id);
+    $jenis->delete();
+
+    return redirect()->route('admin.jenis-hewan.index')
+                    ->with('success', 'Jenis hewan berhasil dihapus.');
+}
+
+
     protected function validateJenisHewan(Request $request, $id = null)
     {
 

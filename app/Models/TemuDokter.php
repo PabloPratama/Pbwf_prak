@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class TemuDokter extends Model
 {
+    use HasFactory;
+
     protected $table = 'temu_dokter';
     protected $primaryKey = 'idreservasi_dokter';
     public $timestamps = false;
@@ -27,11 +28,7 @@ class TemuDokter extends Model
 
     public function roleDokter()
     {
-    return $this->belongsTo(RoleUser::class, 'idrole_user', 'idrole_user')
-                ->where('idrole', 2); 
-    }
-    public function dokter()
-    {
-    return $this->roleDokter?->user;
+        return $this->belongsTo(RoleUser::class, 'idrole_user', 'idrole_user')
+                    ->where('idrole', 2);
     }
 }

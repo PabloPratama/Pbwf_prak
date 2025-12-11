@@ -16,7 +16,8 @@ class RekamMedis extends Model
         'temuan_klinis',
         'diagnosa',
         'dokter_pemeriksa',
-        'idreservasi_dokter'
+        'idreservasi_dokter',
+        'created_at'
     ];
 
     public function temuDokter()

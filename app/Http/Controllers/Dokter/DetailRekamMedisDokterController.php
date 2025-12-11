@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Dokter;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\DetailRekamMedis;
+use App\Models\RekamMedis;
+use App\Models\KodeTindakanTerapi;
 
 class DetailRekamMedisDokterController extends Controller
 {
@@ -13,8 +16,77 @@ class DetailRekamMedisDokterController extends Controller
             'rekamMedis.temuDokter.pet.pemilik.user',
             'rekamMedis.dokter',
             'tindakan'
-        ])->get();
+        ])->orderBy('iddetail_rekam_medis', 'ASC')->get();
 
         return view('dokter.detail-rekam-medis.index', compact('detail'));
+    }
+
+    public function create()
+    {
+        $rekam = RekamMedis::with('temuDokter.pet')->get();
+        $tindakan = KodeTindakanTerapi::all();
+
+        return view('dokter.detail-rekam-medis.create', compact('rekam', 'tindakan'));
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $this->validateDetail($request);
+
+        $this->createDetail($validated);
+
+        return redirect()->route('dokter.detail-rekam-medis.index')
+            ->with('success', 'Detail rekam medis berhasil ditambahkan');
+    }
+
+    public function edit($id)
+    {
+        $detail = DetailRekamMedis::findOrFail($id);
+        $rekam = RekamMedis::with('temuDokter.pet')->get();
+        $tindakan = KodeTindakanTerapi::all();
+
+        return view('dokter.detail-rekam-medis.edit', compact('detail', 'rekam', 'tindakan'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $detail = DetailRekamMedis::findOrFail($id);
+
+        $validated = $this->validateDetail($request);
+
+        $detail->update([
+            'idrekam_medis' => $validated['idrekam_medis'],
+            'idkode_tindakan_terapi' => $validated['idkode_tindakan_terapi'],
+            'detail' => $validated['detail'],
+        ]);
+
+        return redirect()->route('dokter.detail-rekam-medis.index')
+            ->with('success', 'Detail rekam medis berhasil diperbarui');
+    }
+
+    public function destroy($id)
+    {
+        DetailRekamMedis::findOrFail($id)->delete();
+
+        return redirect()->route('dokter.detail-rekam-medis.index')
+            ->with('success', 'Detail rekam medis berhasil dihapus');
+    }
+
+    protected function validateDetail(Request $request)
+    {
+        return $request->validate([
+            'idrekam_medis' => 'required|numeric',
+            'idkode_tindakan_terapi' => 'required|numeric',
+            'detail' => 'nullable|string',
+        ]);
+    }
+
+    protected function createDetail(array $data)
+    {
+        DetailRekamMedis::create([
+            'idrekam_medis' => $data['idrekam_medis'],
+            'idkode_tindakan_terapi' => $data['idkode_tindakan_terapi'],
+            'detail' => $data['detail'] ?? null,
+        ]);
     }
 }

@@ -14,11 +14,10 @@ class KodeTindakanTerapi extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'kode',
+        'deskripsi_tindakan_terapi',
         'idkategori',
         'idkategori_klinis',
-        'kode',
-        'nama_tindakan',
-        'harga',
     ];
 
     public function kategori()

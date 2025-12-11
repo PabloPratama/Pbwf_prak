@@ -2,12 +2,9 @@
 
 @section('content')
 <div class="mb-3">
-    <!-- Tombol Tambah Pemilik -->
-    <form action="{{ route('admin.pemilik.create') }}" method="GET" style="display: inline;">
-        <button type="submit" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Tambah Pemilik
-        </button>
-    </form>
+    <a href="{{ route('admin.pemilik.create') }}" class="btn btn-primary">
+        Tambah Pemilik
+    </a>
 </div>
 
 <table border="1" cellpadding="8" cellspacing="0">
@@ -17,7 +14,7 @@
             <th>Nama Pemilik</th>
             <th>No WA</th>
             <th>Alamat</th>
-            <th>Aksi</th>
+            <th width="160">Aksi</th>
         </tr>
     </thead>
 
@@ -29,21 +26,19 @@
             <td>{{ $item->no_wa }}</td>
             <td>{{ $item->alamat }}</td>
             <td>
-
-                <button type="button" class="btn btn-sm btn-warning" onclick="window.location='#'">
-                    <i class="fas fa-edit"></i> Edit
-                </button>
-
-                <button type="button" class="btn btn-sm btn-danger"
-                    onclick="if(confirm('Yakin ingin menghapus data ini?')) { document.getElementById('delete-form-{{ $item->idpemilik }}').submit(); }">
-                    <i class="fas fa-trash"></i> Hapus
-                </button>
-
-                <form id="delete-form-{{ $item->idpemilik }}" action="#" method="POST" style="display: none;">
+                <a href="{{ route('admin.pemilik.edit', $item->idpemilik) }}"
+                class="btn btn-sm btn-warning">
+                    Edit
+                </a>
+                <form action="{{ route('admin.pemilik.destroy', $item->idpemilik) }}"
+                    method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
+                    <button class="btn btn-sm btn-danger"
+                        onclick="return confirm('Yakin ingin menghapus data ini?')">
+                        Hapus
+                    </button>
                 </form>
-
             </td>
         </tr>
         @endforeach

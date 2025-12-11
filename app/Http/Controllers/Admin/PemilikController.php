@@ -30,6 +30,37 @@ class PemilikController extends Controller
                         ->with('success', 'Pemilik berhasil ditambahkan.');
     }
 
+    public function edit($id)
+{
+    $pemilik = Pemilik::with('user')->findOrFail($id);
+    return view('admin.pemilik.edit', compact('pemilik'));
+}
+
+public function update(Request $request, $id)
+{
+    $pemilik = Pemilik::with('user')->findOrFail($id);
+    $validated = $this->validatePemilik($request);
+    $pemilik->user->update([
+        'nama'  => trim(ucwords(strtolower($validated['nama']))),
+        'email' => strtolower(str_replace(' ', '', $validated['nama'])) . '@mail.com',
+    ]);
+    $pemilik->update([
+        'no_wa'  => preg_replace('/\s+/', '', $validated['no_wa']),
+        'alamat' => ucfirst(trim($validated['alamat'])),
+    ]);
+    return redirect()->route('admin.pemilik.index')
+        ->with('success', 'Data pemilik berhasil diperbarui.');
+}
+
+public function destroy($id)
+{
+    $pemilik = Pemilik::findOrFail($id);
+    $pemilik->delete();
+    User::where('iduser', $pemilik->iduser)->delete();
+    return redirect()->route('admin.pemilik.index');
+}
+
+
     protected function validatePemilik(Request $request)
     {
         return $request->validate([

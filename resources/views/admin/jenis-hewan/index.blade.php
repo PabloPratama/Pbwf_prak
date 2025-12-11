@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="mb-3">
-    <!-- Tombol Tambah Jenis Hewan mengambil route untuk insert data -->
+    <!-- Tombol Tambah Jenis Hewan -->
     <form action="{{ route('admin.jenis-hewan.create') }}" method="GET" style="display: inline;">
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-plus"></i> Tambah Jenis Hewan
@@ -26,17 +26,23 @@
             <td>{{ $hewan->nama_jenis_hewan }}</td>
             <td>
 
-                <button type="button" class="btn btn-sm btn-warning" onclick="window.location='#'">
+                <!-- Tombol Edit -->
+                <a href="{{ route('admin.jenis-hewan.edit', $hewan->idjenis_hewan) }}"
+                class="btn btn-sm btn-warning">
                     <i class="fas fa-edit"></i> Edit
-                </button>
+                </a>
 
-                <button type="button" class="btn btn-sm btn-danger" onclick="if(confirm('Yakin ingin menghapus data ini?')) { document.getElementById('delete-form-{{ $hewan->idjenis_hewan }}').submit(); }">
-                    <i class="fas fa-trash"></i> Hapus
-                </button>
-
-                <form id="delete-form-{{ $hewan->idjenis_hewan }}" action="#" method="POST" style="display: none;">
+                <!-- Tombol Delete -->
+                <form action="{{ route('admin.jenis-hewan.destroy', $hewan->idjenis_hewan) }}"
+                    method="POST"
+                    style="display:inline;">
                     @csrf
                     @method('DELETE')
+
+                    <button type="submit" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Yakin ingin menghapus data ini?')">
+                        <i class="fas fa-trash"></i> Hapus
+                    </button>
                 </form>
 
             </td>
