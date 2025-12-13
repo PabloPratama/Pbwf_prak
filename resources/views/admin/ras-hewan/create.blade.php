@@ -1,38 +1,65 @@
-@extends('layouts.app')
+@extends('layouts.lte.main')
+
+@section('title', 'Tambah Ras Hewan')
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h5>Tambah Ras Hewan</h5>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <h1>Tambah Ras Hewan</h1>
     </div>
+</section>
 
-    <div class="card-body">
-        <form action="{{ route('admin.ras-hewan.store') }}" method="POST">
-            @csrf
+<section class="content">
+    <div class="container-fluid">
 
-            <div class="mb-3">
-                <label>Nama Ras Hewan</label>
-                <input type="text" name="nama_ras" class="form-control" required>
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Form Tambah Ras Hewan</h3>
             </div>
 
-            <div class="mb-3">
-                <label>Jenis Hewan</label>
-                <select name="idjenis_hewan" class="form-control" required>
-                    @foreach ($jenis as $j)
-                        <option value="{{ $j->idjenis_hewan }}">
-                            {{ $j->nama_jenis_hewan }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+            <form action="{{ route('admin.ras-hewan.store') }}" method="POST">
+                @csrf
 
-            <div class="d-flex justify-content-between">
-                <a href="{{ route('admin.ras-hewan.index') }}" class="btn btn-secondary">
-                    Kembali
-                </a>
-                <button class="btn btn-primary">Simpan</button>
-            </div>
-        </form>
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label>Nama Ras Hewan <span class="text-danger">*</span></label>
+                        <input type="text"
+                            name="nama_ras"
+                            class="form-control"
+                            placeholder="Masukkan nama ras hewan"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jenis Hewan <span class="text-danger">*</span></label>
+                        <select name="idjenis_hewan" class="form-control" required>
+                            <option value="">-- Pilih Jenis Hewan --</option>
+                            @foreach ($jenis as $j)
+                                <option value="{{ $j->idjenis_hewan }}">
+                                    {{ $j->nama_jenis_hewan }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{ route('admin.ras-hewan.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </a>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-save"></i> Simpan
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
-</div>
+</section>
+
 @endsection

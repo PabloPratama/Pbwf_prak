@@ -1,53 +1,75 @@
-@extends('layouts.app')
+@extends('layouts.lte.main')
+
+@section('title', 'Edit Detail Rekam Medis')
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h5>Edit Detail Rekam Medis</h5>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <h1>Edit Detail Rekam Medis</h1>
     </div>
+</section>
 
-    <div class="card-body">
-        <form action="{{ route('admin.detail-rekam-medis.update', $detail->iddetail_rekam_medis) }}" method="POST">
-            @csrf
-            @method('PUT')
+<section class="content">
+    <div class="container-fluid">
 
-            <div class="mb-3">
-                <label>Rekam Medis</label>
-                <select name="idrekam_medis" class="form-control" required>
-                    @foreach ($rekam as $r)
-                        <option value="{{ $r->idrekam_medis }}"
-                            {{ $detail->idrekam_medis == $r->idrekam_medis ? 'selected' : '' }}>
-                            {{ $r->temuDokter?->pet?->nama }} - (ID RM: {{ $r->idrekam_medis }})
-                        </option>
-                    @endforeach
-                </select>
+        <div class="card card-warning">
+            <div class="card-header">
+                <h3 class="card-title">Form Edit Detail Rekam Medis</h3>
             </div>
 
-            <div class="mb-3">
-                <label>Tindakan Terapi</label>
-                <select name="idkode_tindakan_terapi" class="form-control" required>
-                    @foreach ($tindakan as $t)
-                        <option value="{{ $t->idkode_tindakan_terapi }}"
-                            {{ $detail->idkode_tindakan_terapi == $t->idkode_tindakan_terapi ? 'selected' : '' }}>
-                            {{ $t->kode }} - {{ $t->deskripsi_tindakan_terapi }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+            <form action="{{ route('admin.detail-rekam-medis.update', $detail->iddetail_rekam_medis) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-            <div class="mb-3">
-                <label>Keterangan Detail</label>
-                <textarea name="detail" class="form-control">{{ $detail->detail }}</textarea>
-            </div>
+                <div class="card-body">
 
-            <div class="d-flex justify-content-between">
-                <a href="{{ route('admin.detail-rekam-medis.index') }}" class="btn btn-secondary">
-                    Kembali
-                </a>
-                <button class="btn btn-primary">Perbarui</button>
-            </div>
+                    <div class="form-group">
+                        <label>Rekam Medis</label>
+                        <select name="idrekam_medis" class="form-control" required>
+                            @foreach ($rekam as $r)
+                                <option value="{{ $r->idrekam_medis }}"
+                                    {{ $detail->idrekam_medis == $r->idrekam_medis ? 'selected' : '' }}>
+                                    {{ $r->temuDokter?->pet?->nama }} — (ID RM: {{ $r->idrekam_medis }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-        </form>
+                    <div class="form-group">
+                        <label>Tindakan Terapi</label>
+                        <select name="idkode_tindakan_terapi" class="form-control" required>
+                            @foreach ($tindakan as $t)
+                                <option value="{{ $t->idkode_tindakan_terapi }}"
+                                    {{ $detail->idkode_tindakan_terapi == $t->idkode_tindakan_terapi ? 'selected' : '' }}>
+                                    {{ $t->kode }} - {{ $t->deskripsi_tindakan_terapi }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Keterangan Detail</label>
+                        <textarea name="detail" class="form-control">{{ $detail->detail }}</textarea>
+                    </div>
+
+                </div>
+
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{ route('admin.detail-rekam-medis.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </a>
+
+                    <button class="btn btn-warning text-white">
+                        <i class="fas fa-save"></i> Perbarui
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
-</div>
+</section>
+
 @endsection

@@ -1,44 +1,48 @@
-@extends('layouts.app')
+@extends('layouts.lteresepsionis.main')
 
 @section('content')
 
-<div class="card">
+<div class="card card-warning">
     <div class="card-header">
-        <h5>Edit Pemilik</h5>
+        <h3 class="card-title">Edit Pemilik</h3>
     </div>
 
-    <div class="card-body">
-        <form action="{{ route('resepsionis.pemilik.update', $pemilik->idpemilik) }}" method="POST">
-            @csrf
-            @method('PUT')
+    <form action="{{ route('resepsionis.pemilik.update', $pemilik->idpemilik) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-            <div class="mb-3">
+        <div class="card-body">
+
+            <div class="form-group">
                 <label>Nama Pemilik</label>
                 <input type="text" name="nama"
-                    class="form-control"
-                    value="{{ old('nama', $pemilik->user->nama) }}" required>
+                    value="{{ old('nama', $pemilik->user->nama) }}"
+                    class="form-control" required>
             </div>
 
-            <div class="mb-3">
-                <label>No WA</label>
+            <div class="form-group">
+                <label>No WhatsApp</label>
                 <input type="text" name="no_wa"
-                    class="form-control"
-                    value="{{ old('no_wa', $pemilik->no_wa) }}" required>
+                    value="{{ old('no_wa', $pemilik->no_wa) }}"
+                    class="form-control" required>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label>Alamat</label>
-                <textarea name="alamat" class="form-control" required>{{ old('alamat', $pemilik->alamat) }}</textarea>
+                <textarea name="alamat" class="form-control" rows="3" required>{{ old('alamat', $pemilik->alamat) }}</textarea>
             </div>
 
-            <div class="d-flex justify-content-between">
-                <a href="{{ route('resepsionis.pemilik.index') }}" class="btn btn-secondary">Kembali</a>
-                <button class="btn btn-primary">Perbarui</button>
-            </div>
+        </div>
 
-        </form>
-    </div>
-
+        <div class="card-footer d-flex justify-content-between">
+            <a href="{{ route('resepsionis.pemilik.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </a>
+            <button class="btn btn-warning text-white">
+                <i class="fas fa-save"></i> Perbarui
+            </button>
+        </div>
+    </form>
 </div>
 
 @endsection

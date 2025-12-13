@@ -1,48 +1,42 @@
-@extends('layouts.app')
+@extends('layouts.lteresepsionis.main')
 
 @section('content')
-<div class="card">
+
+<div class="card card-primary">
     <div class="card-header">
-        <h5>Tambah Pemilik</h5>
+        <h3 class="card-title">Tambah Pemilik</h3>
     </div>
 
-    <div class="card-body">
+    <form action="{{ route('resepsionis.pemilik.store') }}" method="POST">
+        @csrf
+        <div class="card-body">
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $err)
-                        <li>{{ $err }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form action="{{ route('resepsionis.pemilik.store') }}" method="POST">
-            @csrf
-
-            <div class="mb-3">
+            <div class="form-group">
                 <label>Nama Pemilik</label>
                 <input type="text" name="nama" class="form-control" required>
             </div>
 
-            <div class="mb-3">
-                <label>No WA</label>
+            <div class="form-group">
+                <label>No WhatsApp</label>
                 <input type="text" name="no_wa" class="form-control" required>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label>Alamat</label>
-                <textarea name="alamat" class="form-control" required></textarea>
+                <textarea name="alamat" class="form-control" rows="3" required></textarea>
             </div>
 
-            <div class="d-flex justify-content-between">
-                <a href="{{ route('resepsionis.pemilik.index') }}" class="btn btn-secondary">Kembali</a>
-                <button class="btn btn-primary">Simpan</button>
-            </div>
+        </div>
 
-        </form>
-
-    </div>
+        <div class="card-footer d-flex justify-content-between">
+            <a href="{{ route('resepsionis.pemilik.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </a>
+            <button class="btn btn-primary">
+                <i class="fas fa-save"></i> Simpan
+            </button>
+        </div>
+    </form>
 </div>
+
 @endsection

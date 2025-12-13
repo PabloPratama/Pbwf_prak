@@ -1,61 +1,77 @@
-@extends('layouts.app')
+@extends('layouts.lteperawat.main')
+
+@section('title', 'Dashboard Perawat')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                
-                <div class="card-header">
-                    {{ __('Dashboard Perawat') }} — {{ session('user_name') }}
-                </div>
 
-                <div class="card-body">
+<div class="row">
 
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }} **{{ session('user_role_name') }}**
-
-                    <div class="mt-4">
-                        <p>Menu Perawat:</p>
-
-                        <a href="{{ route('perawat.pet.index') }}" class="btn btn-primary mb-2 w-100">
-                            Lihat Data Pasien
-                        </a>
-
-                        <a href="{{ route('perawat.pemilik.index') }}" class="btn btn-success mb-2 w-100">
-                            Lihat Data Pemilik
-                        </a>
-
-                        <a href="{{ route('perawat.jenis-hewan.index') }}" class="btn btn-warning mb-2 w-100">
-                            Lihat Data Jenis Hewan
-                        </a>
-
-                        <a href="{{ route('perawat.ras-hewan.index') }}" class="btn btn-info mb-2 w-100">
-                            Lihat Data Ras Hewan
-                        </a>
-
-                        <a href="{{ route('perawat.tindakan.index') }}" class="btn btn-danger mb-2 w-100">
-                            Lihat Data Kode Tindakan & Terapi
-                        </a>
-
-                        <a href="{{ route('perawat.rekam-medis.index') }}" class="btn btn-warning mb-2 w-100">
-                            Lihat Data Rekam Medis
-                        </a>
-
-                        <a href="{{ route('perawat.detail-rekam-medis.index') }}" class="btn btn-primary mb-2 w-100">
-                            Lihat Data Detail Rekam Medis
-                        </a>
-
-                    </div>
-
-                </div>
+    {{-- CARD PASIEN --}}
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>{{ $totalPasien ?? 0 }}</h3>
+                <p>Total Pasien</p>
             </div>
+            <div class="icon">
+                <i class="fas fa-dog"></i>
+            </div>
+            <a href="{{ route('perawat.pet.index') }}" class="small-box-footer">
+                Lihat Data <i class="fas fa-arrow-circle-right"></i>
+            </a>
         </div>
     </div>
+
+    {{-- CARD REKAM MEDIS --}}
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>{{ $totalRekam ?? 0 }}</h3>
+                <p>Total Rekam Medis</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-file-medical"></i>
+            </div>
+            <a href="{{ route('perawat.rekam-medis.index') }}" class="small-box-footer">
+                Lihat Data <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+
+    {{-- CARD TINDAKAN --}}
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>{{ $totalTindakan ?? 0 }}</h3>
+                <p>Tindakan & Terapi</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-notes-medical"></i>
+            </div>
+            <a href="{{ route('perawat.tindakan.index') }}" class="small-box-footer">
+                Lihat Data <i class="fas fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+
 </div>
+
+{{-- INFO AKTIVITAS --}}
+<div class="card mt-4">
+    <div class="card-header bg-primary text-white">
+        <h3 class="card-title">Aktivitas Perawat</h3>
+    </div>
+    <div class="card-body">
+        <p>
+            Panel ini digunakan perawat untuk membantu pendataan pasien,
+            pemilik, serta mendukung proses pelayanan medis harian.
+        </p>
+        <ul>
+            <li>Monitoring data pasien</li>
+            <li>Membantu input rekam medis</li>
+            <li>Mendukung tindakan & terapi</li>
+        </ul>
+    </div>
+</div>
+
 @endsection

@@ -1,27 +1,39 @@
-@extends('layouts.app')
+@extends('layouts.lteperawat.main')
+
+@section('title', 'Tambah Rekam Medis')
 
 @section('content')
-<div class="card">
+
+<section class="content-header">
+    <div class="container-fluid">
+        <h1>Tambah Rekam Medis</h1>
+    </div>
+</section>
+
+<section class="content">
+<div class="container-fluid">
+
+<div class="card card-primary">
     <div class="card-header">
-        <h5>Tambah Rekam Medis</h5>
+        <h3 class="card-title">Form Tambah Rekam Medis</h3>
     </div>
 
-    <div class="card-body">
+    <form action="{{ route('perawat.rekam-medis.store') }}" method="POST">
+        @csrf
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        <div class="card-body">
 
-        <form action="{{ route('perawat.rekam-medis.store') }}" method="POST">
-            @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label>Reservasi Temu Dokter</label>
                 <select name="idreservasi_dokter" class="form-control" required>
                     <option value="">-- Pilih --</option>
@@ -33,7 +45,7 @@
                 </select>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label>Dokter Pemeriksa</label>
                 <select name="dokter_pemeriksa" class="form-control" required>
                     @foreach ($dokter as $d)
@@ -42,27 +54,35 @@
                 </select>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label>Anamnesa</label>
                 <input type="text" name="anamnesa" class="form-control" required>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label>Temuan Klinis</label>
                 <input type="text" name="temuan_klinis" class="form-control">
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label>Diagnosa</label>
                 <input type="text" name="diagnosa" class="form-control" required>
             </div>
 
-            <div class="d-flex justify-content-between">
-                <a href="{{ route('perawat.rekam-medis.index') }}" class="btn btn-secondary">Kembali</a>
-                <button class="btn btn-primary">Simpan</button>
-            </div>
+        </div>
 
-        </form>
-    </div>
+        <div class="card-footer d-flex justify-content-between">
+            <a href="{{ route('perawat.rekam-medis.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </a>
+            <button class="btn btn-primary">
+                <i class="fas fa-save"></i> Simpan
+            </button>
+        </div>
+
+    </form>
 </div>
+
+</div>
+</section>
 @endsection

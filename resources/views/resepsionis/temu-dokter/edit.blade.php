@@ -1,33 +1,38 @@
-@extends('layouts.app')
+@extends('layouts.lteresepsionis.main')
 
 @section('content')
 
-<div class="card">
+<div class="card card-warning">
     <div class="card-header">
-        <h5>Edit Temu Dokter</h5>
+        <h3 class="card-title">Edit Temu Dokter</h3>
     </div>
 
-    <div class="card-body">
+    <form action="{{ route('resepsionis.temu-dokter.update', $temu->idreservasi_dokter) }}" method="POST">
+        @csrf
+        @method('PUT')
 
-        <form action="{{ route('resepsionis.temu-dokter.update', $temu->idreservasi_dokter) }}" method="POST">
-            @csrf
-            @method('PUT')
+        <div class="card-body">
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label>No Urut</label>
-                <input type="number" name="no_urut" class="form-control"
-                    value="{{ $temu->no_urut }}" required>
+                <input type="number" name="no_urut"
+                    value="{{ $temu->no_urut }}"
+                    class="form-control" required>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label>Status</label>
                 <select name="status" class="form-control" required>
-                    <option value="S" {{ $temu->status == 'S' ? 'selected' : '' }}>Selesai</option>
-                    <option value="W" {{ $temu->status == 'W' ? 'selected' : '' }}>Waiting</option>
+                    <option value="W" {{ $temu->status == 'W' ? 'selected' : '' }}>
+                        Waiting
+                    </option>
+                    <option value="S" {{ $temu->status == 'S' ? 'selected' : '' }}>
+                        Selesai
+                    </option>
                 </select>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label>Pet</label>
                 <select name="idpet" class="form-control" required>
                     @foreach ($pet as $p)
@@ -39,7 +44,7 @@
                 </select>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label>Dokter</label>
                 <select name="idrole_user" class="form-control" required>
                     @foreach ($dokter as $d)
@@ -51,15 +56,18 @@
                 </select>
             </div>
 
-            <div class="d-flex justify-content-between">
-                <a href="{{ route('resepsionis.temu-dokter.index') }}" class="btn btn-secondary">Kembali</a>
-                <button class="btn btn-primary">Perbarui</button>
-            </div>
+        </div>
 
-        </form>
+        <div class="card-footer d-flex justify-content-between">
+            <a href="{{ route('resepsionis.temu-dokter.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </a>
+            <button class="btn btn-warning text-white">
+                <i class="fas fa-save"></i> Perbarui
+            </button>
+        </div>
 
-    </div>
-
+    </form>
 </div>
 
 @endsection

@@ -1,63 +1,83 @@
-@extends('layouts.app')
+@extends('layouts.lte.main')
+
+@section('title', 'Tambah Detail Rekam Medis')
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h5>Tambah Detail Rekam Medis</h5>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <h1>Tambah Detail Rekam Medis</h1>
     </div>
+</section>
 
-    <div class="card-body">
+<section class="content">
+    <div class="container-fluid">
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form action="{{ route('admin.detail-rekam-medis.store') }}" method="POST">
-            @csrf
-
-            <div class="mb-3">
-                <label>Rekam Medis</label>
-                <select name="idrekam_medis" class="form-control" required>
-                    <option value="">-- Pilih --</option>
-                    @foreach ($rekam as $r)
-                        <option value="{{ $r->idrekam_medis }}">
-                            {{ $r->temuDokter?->pet?->nama }} - (ID RM: {{ $r->idrekam_medis }})
-                        </option>
-                    @endforeach
-                </select>
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Form Tambah Detail Rekam Medis</h3>
             </div>
 
-            <div class="mb-3">
-                <label>Tindakan Terapi</label>
-                <select name="idkode_tindakan_terapi" class="form-control" required>
-                    <option value="">-- Pilih --</option>
-                    @foreach ($tindakan as $t)
-                        <option value="{{ $t->idkode_tindakan_terapi }}">
-                            {{ $t->kode }} - {{ $t->deskripsi_tindakan_terapi }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+            <form action="{{ route('admin.detail-rekam-medis.store') }}" method="POST">
+                @csrf
 
-            <div class="mb-3">
-                <label>Keterangan Detail</label>
-                <textarea name="detail" class="form-control"></textarea>
-            </div>
+                <div class="card-body">
 
-            <div class="d-flex justify-content-between">
-                <a href="{{ route('admin.detail-rekam-medis.index') }}" class="btn btn-secondary">
-                    Kembali
-                </a>
-                <button class="btn btn-primary">Simpan</button>
-            </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-        </form>
+                    <div class="form-group">
+                        <label>Rekam Medis</label>
+                        <select name="idrekam_medis" class="form-control" required>
+                            <option value="">-- Pilih --</option>
+                            @foreach ($rekam as $r)
+                                <option value="{{ $r->idrekam_medis }}">
+                                    {{ $r->temuDokter?->pet?->nama }} (RM: {{ $r->idrekam_medis }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tindakan Terapi</label>
+                        <select name="idkode_tindakan_terapi" class="form-control" required>
+                            <option value="">-- Pilih --</option>
+                            @foreach ($tindakan as $t)
+                                <option value="{{ $t->idkode_tindakan_terapi }}">
+                                    {{ $t->kode }} - {{ $t->deskripsi_tindakan_terapi }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Keterangan Detail</label>
+                        <textarea name="detail" class="form-control"></textarea>
+                    </div>
+
+                </div>
+
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{ route('admin.detail-rekam-medis.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </a>
+
+                    <button class="btn btn-primary">
+                        <i class="fas fa-save"></i> Simpan
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
     </div>
-</div>
+</section>
+
 @endsection

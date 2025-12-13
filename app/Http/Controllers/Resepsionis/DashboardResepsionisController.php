@@ -3,12 +3,20 @@
 namespace App\Http\Controllers\Resepsionis;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardResepsionisController extends Controller
 {
     public function index()
     {
-        return view('resepsionis.dashboard-resepsionis');
+        $totalPemilik = DB::table('pemilik')->count();
+        $totalPet = DB::table('pet')->count();
+        $totalTemuDokter = DB::table('temu_dokter')->count();
+
+        return view('resepsionis.dashboard-resepsionis', compact(
+            'totalPemilik',
+            'totalPet',
+            'totalTemuDokter'
+        ));
     }
 }

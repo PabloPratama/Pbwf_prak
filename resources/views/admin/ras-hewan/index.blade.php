@@ -1,46 +1,67 @@
-@extends('layouts.app')
+@extends('layouts.lte.main')
+
+@section('title', 'Data Ras Hewan')
 
 @section('content')
-<div class="mb-3">
-    <a href="{{ route('admin.ras-hewan.create') }}" class="btn btn-primary">
-        Tambah Ras Hewan
-    </a>
+
+<div class="card">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="card-title">Data Ras Hewan</h3>
+
+        <a href="{{ route('admin.ras-hewan.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Tambah Ras Hewan
+        </a>
+    </div>
+
+    <div class="card-body table-responsive p-0">
+
+        <table class="table table-hover table-bordered table-striped">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>No</th>
+                    <th>Nama Ras Hewan</th>
+                    <th>Jenis Hewan</th>
+                    <th width="180">Aksi</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach ($ras as $index => $item)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $item->nama_ras }}</td>
+                    <td>{{ $item->jenisHewan?->nama_jenis_hewan ?? '-' }}</td>
+
+                    <td>
+
+                        <a href="{{ route('admin.ras-hewan.edit', $item->idras_hewan) }}"
+                            class="btn btn-warning btn-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <form action="{{ route('admin.ras-hewan.destroy', $item->idras_hewan) }}"
+                            method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+
+                            <button class="btn btn-danger btn-sm"
+                                onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+                @endforeach
+            </tbody>
+
+        </table>
+
+    </div>
+
 </div>
 
-<table border="1" cellpadding="8" cellspacing="0">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Nama Ras Hewan</th>
-            <th>Jenis Hewan</th>
-            <th width="160">Aksi</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach ($ras as $index => $item)
-            <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>{{ $item->nama_ras }}</td>
-                <td>{{ $item->jenisHewan?->nama_jenis_hewan ?? '-' }}</td>
-                <td>
-                    <a href="{{ route('admin.ras-hewan.edit', $item->idras_hewan) }}"
-                    class="btn btn-sm btn-warning">
-                        Edit
-                    </a>
-
-                    <form action="{{ route('admin.ras-hewan.destroy', $item->idras_hewan) }}"
-                        method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-danger"
-                            onclick="return confirm('Yakin ingin menghapus data ini?')">
-                            Hapus
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
 @endsection

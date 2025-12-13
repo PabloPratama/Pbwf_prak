@@ -1,66 +1,88 @@
-@extends('layouts.app')
+@extends('layouts.lte.main')
+
+@section('title', 'Edit Rekam Medis')
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h5>Edit Rekam Medis</h5>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <h1>Edit Rekam Medis</h1>
     </div>
+</section>
 
-    <div class="card-body">
-        <form action="{{ route('admin.rekam-medis.update', $rekam->idrekam_medis) }}" method="POST">
-            @csrf
-            @method('PUT')
+<section class="content">
+    <div class="container-fluid">
 
-            <div class="mb-3">
-                <label>Reservasi Temu Dokter</label>
-                <select name="idreservasi_dokter" class="form-control" required>
-                    @foreach ($temu as $t)
-                        <option value="{{ $t->idreservasi_dokter }}"
-                            {{ $rekam->idreservasi_dokter == $t->idreservasi_dokter ? 'selected' : '' }}>
-                            {{ $t->pet?->nama }} - {{ $t->idreservasi_dokter }}
-                        </option>
-                    @endforeach
-                </select>
+        <div class="card card-warning">
+            <div class="card-header">
+                <h3 class="card-title">Form Edit Rekam Medis</h3>
             </div>
 
-            <div class="mb-3">
-                <label>Dokter Pemeriksa</label>
-                <select name="dokter_pemeriksa" class="form-control" required>
-                    @foreach ($dokter as $d)
-                        <option value="{{ $d->iduser }}"
-                            {{ $rekam->dokter_pemeriksa == $d->iduser ? 'selected' : '' }}>
-                            {{ $d->nama }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+            <form action="{{ route('admin.rekam-medis.update', $rekam->idrekam_medis) }}" method="POST">
+                @csrf
+                @method('PUT')
 
-            <div class="mb-3">
-                <label>Anamnesa</label>
-                <input type="text" name="anamnesa"
-                    value="{{ $rekam->anamnesa }}" class="form-control" required>
-            </div>
+                <div class="card-body">
 
-            <div class="mb-3">
-                <label>Temuan Klinis</label>
-                <input type="text" name="temuan_klinis"
-                    value="{{ $rekam->temuan_klinis }}" class="form-control">
-            </div>
+                    <div class="form-group">
+                        <label>Reservasi Temu Dokter</label>
+                        <select name="idreservasi_dokter" class="form-control" required>
+                            @foreach ($temu as $t)
+                                <option value="{{ $t->idreservasi_dokter }}"
+                                    {{ $rekam->idreservasi_dokter == $t->idreservasi_dokter ? 'selected' : '' }}>
+                                    {{ $t->pet?->nama }} - {{ $t->idreservasi_dokter }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-            <div class="mb-3">
-                <label>Diagnosa</label>
-                <input type="text" name="diagnosa"
-                    value="{{ $rekam->diagnosa }}" class="form-control" required>
-            </div>
+                    <div class="form-group">
+                        <label>Dokter Pemeriksa</label>
+                        <select name="dokter_pemeriksa" class="form-control" required>
+                            @foreach ($dokter as $d)
+                                <option value="{{ $d->iduser }}"
+                                    {{ $rekam->dokter_pemeriksa == $d->iduser ? 'selected' : '' }}>
+                                    {{ $d->nama }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-            <div class="d-flex justify-content-between">
-                <a href="{{ route('admin.rekam-medis.index') }}" class="btn btn-secondary">
-                    Kembali
-                </a>
-                <button class="btn btn-primary">Perbarui</button>
-            </div>
+                    <div class="form-group">
+                        <label>Anamnesa</label>
+                        <input type="text" name="anamnesa" class="form-control"
+                            value="{{ $rekam->anamnesa }}" required>
+                    </div>
 
-        </form>
+                    <div class="form-group">
+                        <label>Temuan Klinis</label>
+                        <input type="text" name="temuan_klinis" class="form-control"
+                            value="{{ $rekam->temuan_klinis }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Diagnosa</label>
+                        <input type="text" name="diagnosa" class="form-control"
+                            value="{{ $rekam->diagnosa }}" required>
+                    </div>
+
+                </div>
+
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{ route('admin.rekam-medis.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </a>
+
+                    <button class="btn btn-warning text-white">
+                        <i class="fas fa-save"></i> Perbarui
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
-</div>
+</section>
+
 @endsection
