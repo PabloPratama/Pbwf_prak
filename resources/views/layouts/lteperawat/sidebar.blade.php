@@ -81,6 +81,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('perawat.perawat.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-file-medical-alt"></i>
+                        <p>Data Perawat</p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
 

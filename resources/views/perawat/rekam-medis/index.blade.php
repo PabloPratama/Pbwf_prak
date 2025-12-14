@@ -19,6 +19,7 @@
                     <th>No</th>
                     <th>Waktu</th>
                     <th>Anamnesa</th>
+                    <th>Temuan Klinis</th>
                     <th>Diagnosa</th>
                     <th>Pet</th>
                     <th>Pemilik</th>
@@ -34,6 +35,7 @@
                     <td>{{ $index + 1 }}</td>
                     <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i') }}</td>
                     <td>{{ $item->anamnesa }}</td>
+                    <td>{{ $item->temuan_klinis ?? '-' }}</td>
                     <td>{{ $item->diagnosa }}</td>
                     <td>{{ $item->temuDokter?->pet?->nama ?? '-' }}</td>
                     <td>{{ $item->temuDokter?->pet?->pemilik?->user?->nama ?? '-' }}</td>

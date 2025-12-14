@@ -87,6 +87,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('dokter.dokter.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-file-medical-alt"></i>
+                        <p>Data Dokter</p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
 

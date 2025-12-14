@@ -32,6 +32,7 @@ use App\Http\Controllers\Dokter\TindakanDokterController;
 use App\Http\Controllers\Dokter\PetDokterController;
 use App\Http\Controllers\Dokter\RekamMedisDokterController;
 use App\Http\Controllers\Dokter\DetailRekamMedisDokterController;
+use App\Http\Controllers\Dokter\DokterController;
 
 use App\Http\Controllers\Perawat\DashboardPerawatController;
 use App\Http\Controllers\Perawat\PemilikPerawatController;
@@ -41,6 +42,7 @@ use App\Http\Controllers\Perawat\RasHewanPerawatController;
 use App\Http\Controllers\Perawat\TindakanPerawatController;
 use App\Http\Controllers\Perawat\RekamMedisPerawatController;
 use App\Http\Controllers\Perawat\DetailRekamMedisPerawatController;
+use App\Http\Controllers\Perawat\PerawatController;
 
 use App\Http\Controllers\Pemilik\DashboardPemilikController;
 use App\Http\Controllers\Pemilik\PetPemilikController;
@@ -177,6 +179,7 @@ Route::middleware(['IsDokter'])->group(function () {
     Route::get('/dokter/detail-rekam-medis/{id}/edit', [DetailRekamMedisDokterController::class, 'edit'])->name('dokter.detail-rekam-medis.edit');
     Route::put('/dokter/detail-rekam-medis/{id}', [DetailRekamMedisDokterController::class, 'update'])->name('dokter.detail-rekam-medis.update');
     Route::delete('/dokter/detail-rekam-medis/{id}', [DetailRekamMedisDokterController::class, 'destroy'])->name('dokter.detail-rekam-medis.destroy');
+    Route::get('/dokter/dokter', [DokterController::class, 'index'])->name('dokter.dokter.index');
 });
 
 // ========== Perawat ==========
@@ -194,6 +197,7 @@ Route::middleware(['IsPerawat'])->group(function () {
     Route::put('/perawat/rekam-medis/{id}', [RekamMedisPerawatController::class, 'update'])->name('perawat.rekam-medis.update');
     Route::delete('/perawat/rekam-medis/{id}', [RekamMedisPerawatController::class, 'destroy'])->name('perawat.rekam-medis.destroy');
     Route::get('/perawat/detail-rekam-medis', [DetailRekamMedisPerawatController::class, 'index'])->name('perawat.detail-rekam-medis.index');
+    Route::get('/perawat/perawat', [PerawatController::class, 'index'])->name('perawat.perawat.index');
 });
 
 // ========== Pemilik ==========
