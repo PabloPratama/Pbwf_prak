@@ -71,7 +71,7 @@ class LoginController extends Controller
         }
 
         if ($user->roleUser->isEmpty()) {
-             return redirect()->back()
+            return redirect()->back()
                 ->withErrors(['email' => 'Akun tidak memiliki role aktif.'])
                 ->withInput();
         }
